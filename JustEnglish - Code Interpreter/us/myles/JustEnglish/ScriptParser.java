@@ -33,9 +33,12 @@ public class ScriptParser {
 		ScriptObject current = base;
 		String[] d = script.split(" ");
 		String currentLine = "";
-		for (String s : d)
-			if (match(s, LINE_BREAK) || d[d.length - 1].equals(s)) {
+		for (String s : d) {
+			if (match(s, LINE_BREAK)) {
+				// NEW LINE
+				// PARSE LINE
 				current = parseLine(currentLine, current);
+				// CLEAR
 				currentLine = "";
 			} else {
 				if (currentLine.equals(""))
@@ -43,6 +46,9 @@ public class ScriptParser {
 				else
 					currentLine = currentLine + " " + s;
 			}
+		}
+		// EXECUTE LAST ON STACK
+		parseLine(currentLine, current);
 		return base;
 	}
 
