@@ -34,7 +34,7 @@ public class ScriptParser {
 		String[] d = script.split(" ");
 		String currentLine = "";
 		for (String s : d)
-			if (match(s, LINE_BREAK) || d[d.length].equals(s)) {
+			if (match(s, LINE_BREAK) || d[d.length - 1].equals(s)) {
 				current = parseLine(currentLine, current);
 				currentLine = "";
 			} else {
